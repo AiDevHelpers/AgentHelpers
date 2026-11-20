@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Single NuGet package that bundles every helper assembly. The helper projects are
+    referenced with PrivateAssets="all" so NuGet writes no dependencies for them; their
+    DLLs are copied into this package's lib/ folder by the PackHelperAssemblies target.
+  -->
+  <PropertyGroup>
+    <PackageId>AiDevHelpers.AgentHelpers</PackageId>
+    <Description>Agent helpers (core, Anthropic, DeepSeek, OpenSource, Qwen) in one package. All helper assemblies are bundled.</Description>
+    <PackageTags>ai;agents;llm;helpers</PackageTags>
+    <IsPackable>true</IsPackable>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TokenSaver.AgentHelpers.Core\TokenSaver.AgentHelpers.Core.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\TokenSaver.AgentHelpers.Anthropic\TokenSaver.AgentHelpers.Anthropic.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\TokenSaver.AgentHelpers.DeepSeek\TokenSaver.AgentHelpers.DeepSeek.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\TokenSaver.AgentHelpers.OpenSource\TokenSaver.AgentHelpers.OpenSource.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\TokenSaver.AgentHelpers.Qwen\TokenSaver.AgentHelpers.Qwen.csproj" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);PackHelperAssemblies</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="PackHelperAssemblies">
+    <MSBuild Projects="@(ProjectReference)" Targets="GetTargetPath" Properties="Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" ItemName="HelperAssemblyPath" />
+    </MSBuild>
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="@(HelperAssemblyPath)" PackagePath="lib/$(TargetFramework)/" />
+    </ItemGroup>
+  </Target>
+</Project>

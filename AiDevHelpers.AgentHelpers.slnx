@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AiDevHelpers.AgentHelpers/AiDevHelpers.AgentHelpers.csproj" />
+    <Project Path="src/TokenSaver.AgentHelpers.Core/TokenSaver.AgentHelpers.Core.csproj" />
+    <Project Path="src/TokenSaver.AgentHelpers.Anthropic/TokenSaver.AgentHelpers.Anthropic.csproj" />
+    <Project Path="src/TokenSaver.AgentHelpers.DeepSeek/TokenSaver.AgentHelpers.DeepSeek.csproj" />
+    <Project Path="src/TokenSaver.AgentHelpers.OpenSource/TokenSaver.AgentHelpers.OpenSource.csproj" />
+    <Project Path="src/TokenSaver.AgentHelpers.Qwen/TokenSaver.AgentHelpers.Qwen.csproj" />
+  </Folder>
+</Solution>

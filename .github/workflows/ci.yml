@@ -1,0 +1,68 @@
+name: CI and Package
+
+# Builds and packs AiDevHelpers.AgentHelpers on every push and pull request.
+# Pushes to main also publish the package to GitHub Packages (AiDevHelpers feed).
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  pack:
+    name: Build and pack
+    runs-on: windows-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Nerdbank.GitVersioning needs full history to compute the version.
+          fetch-depth: 0
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore AiDevHelpers.AgentHelpers.slnx
+
+      - name: Build
+        run: dotnet build AiDevHelpers.AgentHelpers.slnx -c Release --no-restore
+
+      - name: Pack
+        run: dotnet pack src/AiDevHelpers.AgentHelpers -c Release --no-build -o artifacts
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/*.nupkg
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish to GitHub Packages
+        # Main only: PRs never publish.
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        # PowerShell does not expand wildcards for native commands, so list the files here.
+        run: |
+          Get-ChildItem artifacts/*.nupkg | ForEach-Object {
+            dotnet nuget push $_.FullName --source https://nuget.pkg.github.com/AiDevHelpers/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+            if ($LASTEXITCODE -ne 0) { throw "nuget push failed for $($_.Name)" }
+          }

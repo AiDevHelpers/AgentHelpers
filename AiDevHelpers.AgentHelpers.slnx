@@ -1,10 +1,13 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/AiDevHelpers.AgentHelpers/AiDevHelpers.AgentHelpers.csproj" />
-    <Project Path="src/TokenSaver.AgentHelpers.Core/TokenSaver.AgentHelpers.Core.csproj" />
-    <Project Path="src/TokenSaver.AgentHelpers.Anthropic/TokenSaver.AgentHelpers.Anthropic.csproj" />
-    <Project Path="src/TokenSaver.AgentHelpers.DeepSeek/TokenSaver.AgentHelpers.DeepSeek.csproj" />
-    <Project Path="src/TokenSaver.AgentHelpers.OpenSource/TokenSaver.AgentHelpers.OpenSource.csproj" />
-    <Project Path="src/TokenSaver.AgentHelpers.Qwen/TokenSaver.AgentHelpers.Qwen.csproj" />
+    <Project Path="src/AiDevHelpers.AgentHelpers.Core/AiDevHelpers.AgentHelpers.Core.csproj" />
+    <Project Path="src/AiDevHelpers.AgentHelpers.Anthropic/AiDevHelpers.AgentHelpers.Anthropic.csproj" />
+    <Project Path="src/AiDevHelpers.AgentHelpers.DeepSeek/AiDevHelpers.AgentHelpers.DeepSeek.csproj" />
+    <Project Path="src/AiDevHelpers.AgentHelpers.OpenSource/AiDevHelpers.AgentHelpers.OpenSource.csproj" />
+    <Project Path="src/AiDevHelpers.AgentHelpers.Qwen/AiDevHelpers.AgentHelpers.Qwen.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AiDevHelpers.AgentHelpers.Core.Tests/AiDevHelpers.AgentHelpers.Core.Tests.csproj" />
   </Folder>
 </Solution>

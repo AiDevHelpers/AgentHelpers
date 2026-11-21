@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TokenSaver.AgentHelpers.Core\TokenSaver.AgentHelpers.Core.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\TokenSaver.AgentHelpers.Anthropic\TokenSaver.AgentHelpers.Anthropic.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\TokenSaver.AgentHelpers.DeepSeek\TokenSaver.AgentHelpers.DeepSeek.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\TokenSaver.AgentHelpers.OpenSource\TokenSaver.AgentHelpers.OpenSource.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\TokenSaver.AgentHelpers.Qwen\TokenSaver.AgentHelpers.Qwen.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\AiDevHelpers.AgentHelpers.Core\AiDevHelpers.AgentHelpers.Core.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\AiDevHelpers.AgentHelpers.Anthropic\AiDevHelpers.AgentHelpers.Anthropic.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\AiDevHelpers.AgentHelpers.DeepSeek\AiDevHelpers.AgentHelpers.DeepSeek.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\AiDevHelpers.AgentHelpers.OpenSource\AiDevHelpers.AgentHelpers.OpenSource.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\AiDevHelpers.AgentHelpers.Qwen\AiDevHelpers.AgentHelpers.Qwen.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup>

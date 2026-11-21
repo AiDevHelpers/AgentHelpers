@@ -5,8 +5,8 @@ They ship as one NuGet package, `AiDevHelpers.AgentHelpers`.
 
 ## What changed
 
-- **Source:** the five projects moved unchanged. Namespaces are still `TokenSaver.AgentHelpers.*`, so
-  consumer code needed no `using` changes.
+- **Source:** the five projects moved unchanged at first. Namespaces were `TokenSaver.AgentHelpers.*` and
+  were later renamed to `AiDevHelpers.AgentHelpers.*`. Consumers must update their `using` directives.
 - **History:** this repo starts fresh. The TokenSaver commit history was not carried over.
 - **Packaging:** `src/AiDevHelpers.AgentHelpers` is the only packable project. It references the five
   helper projects with `PrivateAssets="all"` and copies each helper DLL into `lib/net10.0/` through the

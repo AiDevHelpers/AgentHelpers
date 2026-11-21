@@ -5,13 +5,13 @@ package is `AiDevHelpers.AgentHelpers`. It bundles five assemblies:
 
 | Assembly | Purpose |
 |---|---|
-| `TokenSaver.AgentHelpers.Core` | Contracts, caller detection, adapter registry, context parsing, token estimates |
-| `TokenSaver.AgentHelpers.Anthropic` | Claude Sonnet, Opus and Haiku formatting |
-| `TokenSaver.AgentHelpers.DeepSeek` | DeepSeek R1 and V3 formatting |
-| `TokenSaver.AgentHelpers.Qwen` | Qwen formatting |
-| `TokenSaver.AgentHelpers.OpenSource` | Llama, Mistral, Gemma, and the Copilot, Continue and Cursor client adapters |
+| `AiDevHelpers.AgentHelpers.Core` | Contracts, caller detection, adapter registry, context parsing, token estimates |
+| `AiDevHelpers.AgentHelpers.Anthropic` | Claude Sonnet, Opus and Haiku formatting |
+| `AiDevHelpers.AgentHelpers.DeepSeek` | DeepSeek R1 and V3 formatting |
+| `AiDevHelpers.AgentHelpers.Qwen` | Qwen formatting |
+| `AiDevHelpers.AgentHelpers.OpenSource` | Llama, Mistral, Gemma, and the Copilot, Continue and Cursor client adapters |
 
-Namespaces match the assembly names. Consumer code uses `TokenSaver.AgentHelpers.*` as before.
+Namespaces match the assembly names: `AiDevHelpers.AgentHelpers.*`.
 
 ## What it does
 
@@ -74,11 +74,28 @@ dotnet pack src/AiDevHelpers.AgentHelpers -c Release --no-build -o artifacts
 
 Versions come from `version.json` through Nerdbank.GitVersioning.
 
+## Test
+
+```powershell
+dotnet test AiDevHelpers.AgentHelpers.slnx -c Release
+```
+
+Tests live under `tests/` and use xUnit. `AiDevHelpers.AgentHelpers.Core.Tests` covers the token
+estimator.
+
+## Branches
+
+- `main`: release branch. Protected: PRs only, the `Build and pack` check must pass, no force pushes
+  or deletion. Merges need explicit approval.
+- `dev`: integration branch. Release PRs merge here. Same protection as `main`.
+- `wip`: work in progress. Protected against force pushes and deletion only. No PR or check rules.
+
 ## Publishing
 
 Every push and PR builds and packs. Pushes to `main` also publish the package to
 `https://nuget.pkg.github.com/AiDevHelpers/index.json`. Consumers need a PAT with `read:packages` for
 that feed.
 
-See [docs/move-from-tokensaver.md](docs/move-from-tokensaver.md) for the history of the move from
+See [docs/source-reference.md](docs/source-reference.md) for the public types, adapters, and detection
+rules. See [docs/move-from-tokensaver.md](docs/move-from-tokensaver.md) for the history of the move from
 TokenSaver.
